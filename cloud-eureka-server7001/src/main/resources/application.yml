@@ -9,9 +9,9 @@ eureka:
     fetch-registry: false       #false表示自己就是注册中心，我的职责就是维护服务实例,并不区检索服务
     service-url:
       # 设置与 Eureka Server 交互的地址，查询服务和注册服务都需要依赖这个地址
-#      defaultZone: http://eureka7002.com:7002/eureka/ # 集群指向其他 Eureka
-      defaultZone: http://eureka7001.com:7001/eureka/ # 单机就指向自己
-  server:
-    # 关闭自我保护机制，保证不可用服务及时清除
-    enable-self-preservation: false
-    eviction-interval-timer-in-ms: 2000 # 设置提供者和注册中心心跳时间为 2 秒
+      defaultZone: http://eureka7002.com:7002/eureka/ # 集群指向其他 Eureka
+#      defaultZone: http://eureka7001.com:7001/eureka/ # 单机就指向自己
+#  server:
+#    # 关闭自我保护机制，保证不可用服务及时清除
+#    enable-self-preservation: false
+#    eviction-interval-timer-in-ms: 2000 # 设置提供者和注册中心心跳时间为 2 秒
