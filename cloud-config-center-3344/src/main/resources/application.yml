@@ -1,0 +1,41 @@
+# 在github上修改之后，需要运维工程师发送一个post请求来通知客户端来刷新获取最新配置
+# 广播通知：
+#curl -X POST http://localhost:3344(配置中心)/actuator/bus-refresh
+# 定点通知：
+#curl -X POST http://localhost:3344(配置中心)/actuator/bus-refresh/config-client:3355(微服务name:port)
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-center
+  cloud:
+    config:
+      server:
+        git:
+          skipSslValidation: true # 跳过ssl认证
+          uri: https://github.com/zk-kiger/springcloud-config.git
+          # 搜索目录
+          search-paths:
+            - springcloud-config
+      # 读取分支
+      label: master
+
+  rabbitmq:
+      host: localhost
+      port: 5672
+      username: guest
+      password: guest
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka
+
+# 暴露bus刷新配置的端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "bus-refresh"
